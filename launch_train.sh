@@ -13,4 +13,4 @@ JOB_NAME=first-uNAS-cnn_mnist_struct_pru
 JOB_RESULTS_DIR="$PROJECT_DIR"/results/"$JOB_NAME"
 mkdir -p "$JOB_RESULTS_DIR"
 
-sbatch --job_name "$JOB_NAME" "$SRC_DIR"/train.sbatch --name "$JOB_NAME"
+sbatch --job-name "$JOB_NAME" "$SRC_DIR"/train.sbatch --name "$JOB_NAME"
