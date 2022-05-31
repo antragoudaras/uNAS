@@ -1,5 +1,5 @@
 #!/bin/bash --login
-#SBATCH --time=12:00:00
+#SBATCH --time=2:00:00
 #SBATCH --nodes=1
 #SBATCH --gpus-per-node=v100:1
 #SBATCH --cpus-per-gpu=6 
@@ -7,8 +7,11 @@
 #SBATCH --constraint=intel
 #SBATCH --partition=batch
 #SBATCH --mail-type=ALL
-#SBATCH --output=../results/%x/%j-slurm.out
-#SBATCH --error=../results/%x/%j-slurm.err
+#SBATCH --output=../results/%x-%j-slurm.out
+#SBATCH --error=../results/%x-%j-slurm.err
+
+set -e
+module purge
 
 # Load software stack
 conda activate ../env
