@@ -13,4 +13,4 @@
 # Load software stack
 conda activate ../env
 
-python driver.py configs/cnn_mnist_struct_pru.py "$@"
+python driver.py configs/cnn_mnist_struct_pru.py "$1"
