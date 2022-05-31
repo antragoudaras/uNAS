@@ -12,8 +12,8 @@
 
 set -e
 module purge
-module load cuda/10.1.105 
-module load cudnn/7.5.0-cuda10.1.105  
+module load cuda/11.2.2
+module load cudnn/8.1.1-cuda11.2.2 
 # Load software stack
 conda activate ../env
 
