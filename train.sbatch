@@ -17,4 +17,4 @@ module load cuda/10.1.105
 # Load software stack
 conda activate ../env
 
-python driver.py configs/cnn_mnist_struct_pru.py "$1"
+python driver.py configs/cnn_mnist_struct_pru.py "$1" "$2"
