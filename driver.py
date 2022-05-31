@@ -10,6 +10,7 @@ from pathlib import Path
 
 from search_algorithms import BayesOpt
 
+print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 
 def main():
     logging.basicConfig(level=logging.INFO,
