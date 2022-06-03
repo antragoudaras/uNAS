@@ -7,10 +7,10 @@ set -e
 PROJECT_DIR="$PWD"
 
 # project should have a src directory
-SRC_DIR="$PROJECT_DIR"/uNAS
-
-JOB_NAME=first-uNAS-cnn_mnist_struct_pru
-JOB_RESULTS_DIR="$PROJECT_DIR"/results/"$JOB_NAME"
+SRC_DIR="$PROJECT_DIR"
+JOB_RESULTS_DIR="$PROJECT_DIR"/results
 mkdir -p "$JOB_RESULTS_DIR"
 
-sbatch --job-name "$JOB_NAME" "$SRC_DIR"/train.sbatch --name "$JOB_NAME"
+JOB_NAME=continue-uNAS-cnn_mnist_struct_pru
+
+sbatch --job-name "$JOB_NAME" "$SRC_DIR"/train.sbatch --load-from /ibex/scratch/tragoua/tensorflow-uNAS/uNAS/artifacts/cnn_mnist/12hours_uNAS_agingevosearch_state.pickle --name "$JOB_NAME"
