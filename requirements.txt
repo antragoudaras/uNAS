@@ -1,0 +1,15 @@
+ray
+spektral
+protobuf==3.19.0
+scikit-learn
+tensorflow==2.8.0
+pillow
+tensorflow--addons
+pydot
+tqdm
+redis
+matplotlib
+parameterized 
+dragonfly-opt==0.1.5
+cython
+POT
