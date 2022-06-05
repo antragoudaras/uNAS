@@ -214,7 +214,7 @@ def main():
     p.add_argument("search_state_file", type=str)
     args = p.parse_args()
 
-    process(args.output_mode, args.search_state_file)
+    # process(args.output_mode, args.search_state_file)
 
 
 def polyfit(x, y, degree):
@@ -290,10 +290,10 @@ if __name__ == '__main__':
     #                   x_range=(0.00, 0.04), y_range=(100, 3_000_000),
     #                   title="μNAS on MNIST w/o mem. usage constraint",
     #                   output_file="mnist_no_pmu.pdf")
-    # plot_pareto_front("artifacts/cnn_mnist/plain_final_agingevosearch_state.pickle",
-    #                   x_range=(0.00, 0.04), y_range=(100, 3_000_000),
-    #                   title="μNAS on MNIST w/ all constraints",
-    #                   output_file="mnist_all.pdf")
+    plot_pareto_front("artifacts/cnn_mnist/plain_final_agingevosearch_state.pickle",
+                      x_range=(0.00, 0.04), y_range=(100, 3_000_000),
+                      title="μNAS on MNIST w/ all constraints",
+                      output_file="mnist_all.pdf")
     # multiple_pareto_fronts(
     #     ["artifacts/cnn_mnist/plain_final_agingevosearch_state.pickle",
     #      "artifacts/cnn_mnist/plain_final_bo_search_state.pickle",
