@@ -14,3 +14,5 @@ dragonfly-opt==0.1.5
 cython
 POT
 numpy==1.18.0
+moabb
+braindecode

@@ -152,3 +152,7 @@ static
 artifacts
 *.pickle
 *.h5
+
+#tragos-ignores
+/.vscode
+/BCI_IV
