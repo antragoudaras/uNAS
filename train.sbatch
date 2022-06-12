@@ -15,6 +15,6 @@ module purge
 module load cuda/11.2.2
 module load cudnn/8.1.1-cuda11.2.2 
 # Load software stack
-conda activate ../env
+conda activate ./env
 
 python driver.py configs/cnn_mnist_struct_pru.py "$1" "$2" "$3" "$4"
