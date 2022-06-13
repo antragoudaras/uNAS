@@ -9,16 +9,18 @@ search_algorithm = AgingEvoSearch
 
 training_config = TrainingConfig(
     dataset=EggDataset(subject_id=3),
-    epochs=25,
+    epochs=100,
     batch_size=26,
     optimizer=lambda: AdamW(learning_rate=0.0005, weight_decay=1e-5),
     callbacks=lambda: [],
 )
 
+print('Tragos trainig config, train_values: {}, train_shape: {}'.format(training_config.dataset.train, training_config.dataset.train.shape))
+
 search_config = AgingEvoConfig(
     search_space=CnnSearchSpace(),
-    population_size=50,
-    rounds=1000,
+    population_size=100,
+    rounds=2000,
     checkpoint_dir="artifacts/cnn_egg"
 )
 
