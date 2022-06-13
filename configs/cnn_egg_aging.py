@@ -15,7 +15,7 @@ training_config = TrainingConfig(
     callbacks=lambda: [],
 )
 
-print('Tragos trainig config, train_values: {}, train_shape: {}'.format(training_config.dataset.train[0], training_config.dataset.train[0].shape))
+print('Tragos training config, train_values: {}, train_shape: {}'.format(training_config.dataset.train[0], training_config.dataset.train[0].shape), flush=True)
 
 search_config = AgingEvoConfig(
     search_space=CnnSearchSpace(),
