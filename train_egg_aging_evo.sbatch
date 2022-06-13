@@ -7,8 +7,8 @@
 #SBATCH --constraint=intel
 #SBATCH --partition=batch
 #SBATCH --mail-type=ALL
-#SBATCH --output=./results/%x-%j-slurm.out
-#SBATCH --error=./results/%x-%j-slurm.err
+#SBATCH --output=./results_egg_subject_id3/%x-%j-slurm.out
+#SBATCH --error=./results_egg_subject_id3/%x-%j-slurm.err
 
 set -e
 module purge
@@ -17,4 +17,4 @@ module load cudnn/8.1.1-cuda11.2.2
 # Load software stack
 conda activate ./env
 
-python driver.py configs/cnn_mnist_struct_pru.py "$1" "$2" "$3" "$4"
+python driver.py configs/cnn_egg_aging.py "$@"

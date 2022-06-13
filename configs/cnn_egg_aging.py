@@ -9,7 +9,7 @@ search_algorithm = AgingEvoSearch
 
 training_config = TrainingConfig(
     dataset=EggDataset(subject_id=3),
-    epochs=100,
+    epochs=75,
     batch_size=26,
     optimizer=lambda: AdamW(learning_rate=0.0005, weight_decay=1e-5),
     callbacks=lambda: [],
@@ -28,5 +28,5 @@ bound_config = BoundConfig(
     error_bound=0.2,
     peak_mem_bound=60000,
     model_size_bound=40000,
-    mac_bound=40000000
+    mac_bound=50000000
 )
