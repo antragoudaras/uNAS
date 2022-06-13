@@ -15,5 +15,3 @@ cython
 POT
 moabb
 braindecode
-torchtext
-torchaudio

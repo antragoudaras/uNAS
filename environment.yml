@@ -1,11 +1,13 @@
 name: uNAS_env
 
 channels:
+  - pytorch
   - conda-forge
   - defaults
 
 dependencies:
   - python=3.7
+  - libgcc
   - pip
   - pip:
     - -r requirements.txt
@@ -13,3 +15,6 @@ dependencies:
   - pytorch-lightning
   - torchmetrics
   - torchvision
+  - torchtext
+  - torchaudio
+  
