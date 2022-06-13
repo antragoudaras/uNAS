@@ -11,7 +11,7 @@ training_config = TrainingConfig(
     dataset=EggDataset(subject_id=3),
     epochs=25,
     batch_size=26,
-    optimizer=lambda: AdamW(lr=0.0005, weight_decay=1e-5),
+    optimizer=lambda: AdamW(learning_rate=0.0005, weight_decay=1e-5),
     callbacks=lambda: [],
 )
 
