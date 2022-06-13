@@ -11,7 +11,5 @@ dependencies:
     - -r requirements.txt
   - pytorch
   - pytorch-lightning
-  - torchaudio
   - torchmetrics
-  - torchtext
   - torchvision
