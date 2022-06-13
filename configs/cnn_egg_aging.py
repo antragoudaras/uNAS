@@ -23,7 +23,7 @@ search_config = AgingEvoConfig(
 )
 
 bound_config = BoundConfig(
-    error_bound=20.0,
+    error_bound=0.2,
     peak_mem_bound=60000,
     model_size_bound=40000,
     mac_bound=40000000
