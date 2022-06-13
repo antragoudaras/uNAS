@@ -7,6 +7,7 @@
 #SBATCH --constraint=intel
 #SBATCH --partition=batch
 #SBATCH --mail-type=ALL
+#SBATCH --job-name="uNAS_egg_dataset_subject_id3_agingevo_nopruning"
 #SBATCH --output=./results_egg_subject_id3/%x-%j-slurm.out
 #SBATCH --error=./results_egg_subject_id3/%x-%j-slurm.err
 
