@@ -10,7 +10,8 @@ dependencies:
   - pip:
     - -r requirements.txt
   - pytorch
-  - torchvision
+  - pytorch-lightning
+  - torchaudio
   - torchmetrics
   - torchtext
-  - torchaudio
+  - torchvision
