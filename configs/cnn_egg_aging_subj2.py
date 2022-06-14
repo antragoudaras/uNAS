@@ -9,8 +9,8 @@ search_algorithm = AgingEvoSearch
 
 training_config = TrainingConfig(
     dataset=EggDataset(subject_id=2),
-    epochs=75,
-    batch_size=26,
+    epochs=90,
+    batch_size=100,
     optimizer=lambda: AdamW(learning_rate=0.0005, weight_decay=1e-5),
     callbacks=lambda: [],
 )
@@ -20,13 +20,13 @@ print('Tragos training config, train_values: {}, train_shape: {}'.format(trainin
 search_config = AgingEvoConfig(
     search_space=CnnSearchSpace(),
     population_size=100,
-    rounds=2000,
+    rounds=4000,
     checkpoint_dir="artifacts/cnn_egg"
 )
 
 bound_config = BoundConfig(
-    error_bound=0.2,
-    peak_mem_bound=60000,
-    model_size_bound=40000,
-    mac_bound=50000000
+    error_bound=None,
+    peak_mem_bound=None,
+    model_size_bound=None,
+    mac_bound=None
 )
