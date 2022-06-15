@@ -4,6 +4,7 @@ protobuf==3.19.0
 scikit-learn
 tensorflow==2.8.0
 pillow
+tqdm
 tensorflow--addons
 pydot
 tqdm
