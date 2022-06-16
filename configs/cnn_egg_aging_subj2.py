@@ -9,8 +9,8 @@ search_algorithm = AgingEvoSearch
 
 training_config = TrainingConfig(
     dataset=EggDataset(subject_id=2, validation_split=0.2),
-    epochs=95,
-    batch_size=100,
+    epochs=75,
+    batch_size=26,
     optimizer=lambda: AdamW(learning_rate=0.0005, weight_decay=1e-5),
     callbacks=lambda: [],
 )
