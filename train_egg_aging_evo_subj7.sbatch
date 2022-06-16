@@ -7,9 +7,9 @@
 #SBATCH --constraint=intel
 #SBATCH --partition=batch
 #SBATCH --mail-type=ALL
-#SBATCH --job-name="uNAS_egg_dataset_subject_id3_no_pruning_new_setup"
-#SBATCH --output=./results_egg_subject_id3_constrained/%x-%j-slurm.out
-#SBATCH --error=./results_egg_subject_id3_constrained/%x-%j-slurm.err
+#SBATCH --job-name="uNAS_egg_dataset_subject_id7_no_pruning_new_setup"
+#SBATCH --output=./results_egg_subject_id7_constrained/%x-%j-slurm.out
+#SBATCH --error=./results_egg_subject_id7_constrained/%x-%j-slurm.err
 
 set -e
 module purge
@@ -19,4 +19,4 @@ module load cudnn/8.1.1-cuda11.2.2
 # Load software stack
 conda activate ./env
 
-python driver.py configs/cnn_egg_aging_subj3.py "$@"
+python driver.py configs/cnn_egg_aging_subj7.py "$@"
