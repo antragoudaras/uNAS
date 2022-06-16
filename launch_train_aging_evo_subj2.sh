@@ -8,9 +8,9 @@ PROJECT_DIR="$PWD"
 
 # project should have a src directory
 SRC_DIR="$PROJECT_DIR"
-JOB_RESULTS_DIR="$PROJECT_DIR"/results_egg_subject_id2
+JOB_RESULTS_DIR="$PROJECT_DIR"/results_egg_subject_id2_constrained
 mkdir -p "$JOB_RESULTS_DIR"
 
-JOB_NAME=uNAS_egg_dataset_subject_id2_agingevo_nopruning_no_bounds
+JOB_NAME=uNAS_egg_dataset_subject_id2_nopruning_constrained_new_setup
 
 sbatch "$SRC_DIR"/train_egg_aging_evo_subj2.sbatch --name "$JOB_NAME"
