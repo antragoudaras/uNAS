@@ -11,6 +11,6 @@ SRC_DIR="$PROJECT_DIR"
 JOB_RESULTS_DIR="$PROJECT_DIR"/results_egg_subject_id2_constrained
 mkdir -p "$JOB_RESULTS_DIR"
 
-JOB_NAME=uNAS_egg_dataset_subject_id2_nopruning_constrained_new_setup
+JOB_NAME=uNAS_egg_dataset_subject_id2_no_pruning_new_setup
 
 sbatch "$SRC_DIR"/train_egg_aging_evo_subj2.sbatch --name "$JOB_NAME"

@@ -7,7 +7,7 @@
 #SBATCH --constraint=intel
 #SBATCH --partition=batch
 #SBATCH --mail-type=ALL
-#SBATCH --job-name="uNAS_egg_dataset_subject_id2_nopruning_constrained_new_setup"
+#SBATCH --job-name="uNAS_egg_dataset_subject_id2_no_pruning_new_setup"
 #SBATCH --output=./results_egg_subject_id2_constrained/%x-%j-slurm.out
 #SBATCH --error=./results_egg_subject_id2_constrained/%x-%j-slurm.err
 
