@@ -7,9 +7,9 @@
 #SBATCH --constraint=intel
 #SBATCH --partition=batch
 #SBATCH --mail-type=ALL
-#SBATCH --job-name="uNAS_egg_dataset_subject_id1_no_pruning_new_setup_256kb"
-#SBATCH --output=./results_egg_subject_id1_constrained_256_kb/%x-%j-slurm.out
-#SBATCH --error=./results_egg_subject_id1_constrained_256_kb/%x-%j-slurm.err
+#SBATCH --job-name="uNAS_egg_dataset_subject_id1_no_pruning_new_setup_256kb_130_epochs_20_percent"
+#SBATCH --output=./results_egg_subject_id1_constrained_256_kb_130_epochs_20_percent/%x-%j-slurm.out
+#SBATCH --error=./results_egg_subject_id1_constrained_256_kb_130_epochs_20_percent/%x-%j-slurm.err
 
 set -e
 module purge
