@@ -51,7 +51,7 @@ class EggDatasetCropped(Dataset):
         preprocess(dataset, preprocessors)
         
         input_window_samples = 1000
-        n_preds_per_input= 467
+        n_preds_per_input = 467
         
         trial_start_offset_seconds = -0.5
         # Extract sampling frequency, check that they are same in all datasets
