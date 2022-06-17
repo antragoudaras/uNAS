@@ -49,19 +49,27 @@ class EggDataset(Dataset):
         ]
         # Transform the data
         preprocess(dataset, preprocessors)
+        input_window_samples = 1000
+        n_preds_per_input= 467
+        
         trial_start_offset_seconds = -0.5
         # Extract sampling frequency, check that they are same in all datasets
         sfreq = dataset.datasets[0].raw.info['sfreq']
         assert all([ds.raw.info['sfreq'] == sfreq for ds in dataset.datasets])
+
         # Calculate the trial start offset in samples.
         trial_start_offset_samples = int(trial_start_offset_seconds * sfreq)
+
         # Create windows using braindecode function for this. It needs parameters to define how
         # trials should be used.
         windows_dataset = create_windows_from_events(
             dataset,
             trial_start_offset_samples=trial_start_offset_samples,
             trial_stop_offset_samples=0,
-            preload=True,
+            window_size_samples=input_window_samples,
+            window_stride_samples=n_preds_per_input,
+            drop_last_window=False,
+            preload=True
         )
         splitted = windows_dataset.split('session')
         train_set = splitted['session_T']
