@@ -6,3 +6,4 @@ from .dummy import Dummy
 from .chars74k import Chars74K
 from .speech_commands import SpeechCommands
 from .egg_dataset import EggDataset
+from .egg_dataset_cropped import EggDatasetCropped

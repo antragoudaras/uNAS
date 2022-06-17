@@ -8,7 +8,7 @@ from braindecode.preprocessing import (
     exponential_moving_standardize, preprocess, Preprocessor, scale)
 from braindecode.preprocessing import create_windows_from_events
 
-class EggDataset(Dataset):
+class EggDatasetCropped(Dataset):
     def __init__(self, subject_id=None, validation_split=0.1, seed=0):
         self.subject_id = subject_id
         
@@ -49,6 +49,7 @@ class EggDataset(Dataset):
         ]
         # Transform the data
         preprocess(dataset, preprocessors)
+        
         input_window_samples = 1000
         n_preds_per_input= 467
         
