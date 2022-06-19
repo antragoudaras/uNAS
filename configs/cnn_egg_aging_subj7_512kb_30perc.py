@@ -7,7 +7,7 @@ from configs.cnn_egg_aging_base import search_config, search_algorithm
 training_config = TrainingConfig(
     dataset=EggDataset(subject_id=7, validation_split=0.3),
     epochs=75,
-    batch_size=26,
+    batch_size=87,
     optimizer=lambda: AdamW(learning_rate=0.0005, weight_decay=1e-5),
     callbacks=lambda: [],
 )
