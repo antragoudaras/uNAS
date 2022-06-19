@@ -19,4 +19,4 @@ module load cudnn/8.1.1-cuda11.2.2
 # Load software stack
 conda activate ./env
 
-python driver.py configs/cnn_egg_aging_subj1_512kb_20perc.py "$@"
+python driver.py configs/cnn_egg_aging_subj1_512kb_cropped_20perc.py "$@"
