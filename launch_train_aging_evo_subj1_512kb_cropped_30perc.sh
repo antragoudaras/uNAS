@@ -13,4 +13,4 @@ mkdir -p "$JOB_RESULTS_DIR"
 
 JOB_NAME=uNAS_egg_dataset_cropped_subject_id1_no_pruning_new_setup_512kb_130_epochs_30_percent
 
-sbatch "$SRC_DIR"/train_egg_aging_evo_subj1_512kb_cropped_30perc.sbatch --name "$JOB_NAME"
+sbatch "$SRC_DIR"/train_egg_aging_evo_subj1_512kb_cropped_30perc.sbatch --name "$JOB_NAME" --load-from "$SRC_DIR"/artifacts/cnn_egg_cropped/uNAS_egg_dataset_cropped_subject_id1_no_pruning_new_setup_512kb_130_epochs_30_percent_agingevosearch_state.pickle
