@@ -15,7 +15,7 @@ training_config = TrainingConfig(
 print('Tragos training config, train_values: {}, train_shape: {}'.format(training_config.dataset.train[0], training_config.dataset.train[0].shape), flush=True)
 
 bound_config = BoundConfig(
-    error_bound=0.2,
+    error_bound=0.05,
     peak_mem_bound=256000,
     model_size_bound=160000,
     mac_bound=200000000
