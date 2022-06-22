@@ -13,4 +13,4 @@ mkdir -p "$JOB_RESULTS_DIR"
 
 JOB_NAME=uNAS_egg_dataset_cropped_subject_id1_no_pruning_new_setup_64kb_130_epochs_10_percent
 
-sbatch "$SRC_DIR"/ --name "$JOB_NAME" 
+sbatch "$SRC_DIR"/train_egg_aging_evo_subj1_64kb_cropped_10perc.sbatch --name "$JOB_NAME" 
