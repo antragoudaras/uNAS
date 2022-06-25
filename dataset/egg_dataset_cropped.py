@@ -51,8 +51,78 @@ class EggDatasetCropped(Dataset):
         preprocess(dataset, preprocessors)
         
         input_window_samples = 1000
-        n_preds_per_input = 467
-        
+
+
+        ######################################################################
+        # Now we create the model. To enable it to be used in cropped decoding
+        # efficiently, we manually set the length of the final convolution layer
+        # to some length that makes the receptive field of the ConvNet smaller
+        # than ``input_window_samples`` (see ``final_conv_length=30`` in the model
+        # definition).
+        #
+
+        import torch
+        from braindecode.util import set_random_seeds
+        from braindecode.models import ShallowFBCSPNet
+
+        cuda = torch.cuda.is_available()  # check if GPU is available, if True chooses to use it
+        device = 'cuda' if cuda else 'cpu'
+        if cuda:
+            torch.backends.cudnn.benchmark = True
+        # Set random seed to be able to roughly reproduce results
+        # Note that with cudnn benchmark set to True, GPU indeterminism
+        # may still make results substantially different between runs.
+        # To obtain more consistent results at the cost of increased computation time,
+        # you can set `cudnn_benchmark=False` in `set_random_seeds`
+        # or remove `torch.backends.cudnn.benchmark = True`
+        seed = 20200220
+        set_random_seeds(seed=seed, cuda=cuda)
+
+        n_classes = 4
+        # Extract number of chans from dataset
+        n_chans = dataset[0][0].shape[0]
+
+        model = ShallowFBCSPNet(
+            n_chans,
+            n_classes,
+            input_window_samples=input_window_samples,
+            final_conv_length=30,
+        )
+
+        # Send model to GPU
+        if cuda:
+            model.cuda()
+
+
+        ######################################################################
+        # And now we transform model with strides to a model that outputs dense
+        # prediction, so we can use it to obtain predictions for all
+        # crops.
+        #
+
+        from braindecode.models import to_dense_prediction_model, get_output_shape
+
+        to_dense_prediction_model(model)
+
+
+        ######################################################################
+        # To know the models’ receptive field, we calculate the shape of model
+        # output for a dummy input.
+        #
+
+        n_preds_per_input = get_output_shape(model, n_chans, input_window_samples)[2]
+
+
+        ######################################################################
+        # Cut the data into windows
+        # -------------------------
+        #
+        # In contrast to trialwise decoding, we have to supply an explicit window size and
+        # window stride to the ``create_windows_from_events`` function.
+        #
+
+        from braindecode.preprocessing import create_windows_from_events
+
         trial_start_offset_seconds = -0.5
         # Extract sampling frequency, check that they are same in all datasets
         sfreq = dataset.datasets[0].raw.info['sfreq']
@@ -72,6 +142,7 @@ class EggDatasetCropped(Dataset):
             drop_last_window=False,
             preload=True
         )
+
         splitted = windows_dataset.split('session')
         train_set = splitted['session_T']
         test_set = splitted['session_E']
