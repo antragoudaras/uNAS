@@ -1,12 +1,12 @@
 from tensorflow_addons.optimizers import AdamW
 
-from dataset import EggDatasetCroppedLowFreq
+from dataset import EggDatasetCropped
 from config import TrainingConfig, BoundConfig
-from configs.cnn_egg_aging_base_cropped_low_freq import search_config, search_algorithm
+from configs.cnn_egg_aging_base_cropped import search_config, search_algorithm
 
 training_config = TrainingConfig(
-    dataset=EggDatasetCroppedLowFreq(subject_id=1, validation_split=0.1),
-    epochs=70,
+    dataset=EggDatasetCropped(subject_id=9, validation_split=0.1),
+    epochs=130,
     batch_size=26,
     optimizer=lambda: AdamW(learning_rate=0.0005, weight_decay=1e-5),
     callbacks=lambda: [],
@@ -16,7 +16,7 @@ print('Tragos training config, train_values: {}, train_shape: {}'.format(trainin
 
 bound_config = BoundConfig(
     error_bound=0.05,
-    peak_mem_bound=512000,
-    model_size_bound=320000,
-    mac_bound=400000000
+    peak_mem_bound=256000,
+    model_size_bound=160000,
+    mac_bound=200000000
 )
