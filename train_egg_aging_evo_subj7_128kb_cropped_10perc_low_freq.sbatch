@@ -7,9 +7,9 @@
 #SBATCH --constraint=intel
 #SBATCH --partition=batch
 #SBATCH --mail-type=ALL
-#SBATCH --job-name="uNAS_egg_dataset_low_freq_cropped_subject_id7_no_pruning_new_setup_128kb_70_epochs_10_percent"
-#SBATCH --output=./results_egg_low_freq_subject_id7_cropped_constrained_128_kb_70_epochs_10_percent/%x-%j-slurm.out
-#SBATCH --error=./results_egg_low_freq_subject_id7_cropped_constrained_128_kb_70_epochs_10_percent/%x-%j-slurm.err
+#SBATCH --job-name="lrerun_uNAS_egg_dataset_low_freq_cropped_subject_id7_no_pruning_new_setup_128kb_70_epochs_10_percent"
+#SBATCH --output=./lrerun_results_egg_low_freq_subject_id7_cropped_constrained_128_kb_70_epochs_10_percent/%x-%j-slurm.out
+#SBATCH --error=./lrerun_results_egg_low_freq_subject_id7_cropped_constrained_128_kb_70_epochs_10_percent/%x-%j-slurm.err
 
 set -e
 module purge
