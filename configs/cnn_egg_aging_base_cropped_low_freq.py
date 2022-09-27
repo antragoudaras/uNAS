@@ -7,7 +7,7 @@ search_algorithm = AgingEvoSearch
 
 search_config = AgingEvoConfig(
     search_space=CnnSearchSpace(),
-    population_size=100,
-    rounds=4000,
+    population_size=50,
+    rounds=10,
     checkpoint_dir="artifacts/cnn_egg_cropped_low_freq"
 )

@@ -4,6 +4,8 @@ import logging
 import numpy as np
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
+# os.environ['UNAS_DEBUG'] = 'True'
+
 import tensorflow as tf
 
 from pathlib import Path
