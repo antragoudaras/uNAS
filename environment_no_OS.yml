@@ -1,0 +1,9 @@
+name: uNAS-env
+channels:
+  - defaults
+dependencies:
+  - python==3.7
+  - pip
+    - -r requirements.txt
+  - pytorch
+prefix: /home/antragoudaras/anaconda3/envs/uNAS-env
