@@ -7,7 +7,7 @@ from configs.cnn_egg_aging_base_cropped_low_freq import search_config, search_al
 training_config = TrainingConfig(
     dataset=EggDatasetCroppedLowFreq(subject_id=1, validation_split=0.2),
     epochs=70,
-    batch_size=52,
+    batch_size=13,
     optimizer=lambda: AdamW(learning_rate=0.0005, weight_decay=1e-5),
     callbacks=lambda: [],
 )
