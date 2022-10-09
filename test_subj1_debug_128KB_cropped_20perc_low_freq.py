@@ -3,7 +3,6 @@ import pickle
 import numpy as np
 import tensorflow as tf
 import argparse
-import logging
 
 from pathlib import Path
 
@@ -64,6 +63,7 @@ for round, point in enumerate(objects[0]):
     _, test_acc = model.evaluate(test, verbose=0)
     print("Loaded test acc. : {}".format(1.0-test_acc))
     print("Logged test acc. : {}".format(point.test_error))
+    
     # val_errors.append(point.val_error)
     # test_errors.append(point.test_error)
     # peak_mem_usage.append(point.resource_features[0])
