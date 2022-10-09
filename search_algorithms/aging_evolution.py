@@ -61,7 +61,6 @@ class GPUTrainer:
         data = self.trainer.dataset
         arch = point.arch
         model = self.ss.to_keras_model(arch, data.input_shape, data.num_classes)
-        # results = self.trainer.train_and_eval(model, sparsity=point.sparsity)
         results = self.trainer.train_and_eval_and_save(model, round=round, sparsity=point.sparsity)
         val_error, test_error = results["val_error"], results["test_error"]
         rg = self.ss.to_resource_graph(arch, data.input_shape, data.num_classes,
