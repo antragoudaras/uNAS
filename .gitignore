@@ -156,3 +156,6 @@ artifacts
 #tragos-ignores
 /.vscode
 #/BCI_IV
+
+#ignore directory with saved keras weights
+/save_model_weights_in_history

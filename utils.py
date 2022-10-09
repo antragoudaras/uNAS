@@ -173,7 +173,8 @@ class Scheduler:
         assert worker_idx is not None
 
         worker = self.workers_and_tasks[worker_idx][0]
-        self.workers_and_tasks[worker_idx] = (worker, worker.evaluate.remote(*args, **kwargs))
+        # self.workers_and_tasks[worker_idx] = (worker, worker.evaluate.remote(*args, **kwargs))
+        self.workers_and_tasks[worker_idx] = (worker, worker.evaluate_and_save.remote(*args, **kwargs))
 
     def await_any(self):
         completed, pending = ray.wait([t for w, t in self.workers_and_tasks if t is not None],

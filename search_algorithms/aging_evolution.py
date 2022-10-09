@@ -55,6 +55,26 @@ class GPUTrainer:
         return EvaluatedPoint(point=point,
                               val_error=val_error, test_error=test_error,
                               resource_features=resource_features)
+    def evaluate_and_save(self, point, round):
+        log = logging.getLogger("Worker")
+
+        data = self.trainer.dataset
+        arch = point.arch
+        model = self.ss.to_keras_model(arch, data.input_shape, data.num_classes)
+        # results = self.trainer.train_and_eval(model, sparsity=point.sparsity)
+        results = self.trainer.train_and_eval_and_save(model, round=round, sparsity=point.sparsity)
+        val_error, test_error = results["val_error"], results["test_error"]
+        rg = self.ss.to_resource_graph(arch, data.input_shape, data.num_classes,
+                                       pruned_weights=results["pruned_weights"])
+        unstructured_sparsity = self.trainer.config.pruning and \
+                                not self.trainer.config.pruning.structured
+        resource_features = [peak_memory_usage(rg), model_size(rg, sparse=unstructured_sparsity),
+                             inference_latency(rg, compute_weight=1, mem_access_weight=0)]
+        log.info(f"Training complete: val_error={val_error:.4f}, test_error={test_error:.4f}, "
+                 f"resource_features={resource_features}.")
+        return EvaluatedPoint(point=point,
+                              val_error=val_error, test_error=test_error,
+                              resource_features=resource_features)
 
 
 class AgingEvoSearch:
@@ -158,7 +178,7 @@ class AgingEvoSearch:
         if load_from:
             self.load_state(load_from)
 
-        ray.init(local_mode=debug_mode())
+        ray.init(num_cpus=4, local_mode=debug_mode())
 
         trainer = ray.put(self.trainer)
         ss = ray.put(self.config.search_space)
@@ -176,7 +196,8 @@ class AgingEvoSearch:
         while len(self.history) < self.initial_population_size:
             if should_submit_more(cap=self.initial_population_size):
                 self.log.info(f"Populating #{point_number()}...")
-                scheduler.submit(self.random_sample())
+                # scheduler.submit(self.random_sample())
+                scheduler.submit(self.random_sample(), len(self.history))
             else:
                 info = scheduler.await_any()
                 self.population.append(info)
@@ -189,7 +210,7 @@ class AgingEvoSearch:
                 sample = np.random.choice(self.population, size=self.sample_size)
                 parent = max(sample, key=self.get_mo_fitness_fn())
 
-                scheduler.submit(self.evolve(parent.point))
+                scheduler.submit(self.evolve(parent.point), len(self.history))
             else:
                 info = scheduler.await_any()
                 self.population.append(info)
