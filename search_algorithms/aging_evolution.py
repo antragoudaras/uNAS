@@ -55,13 +55,13 @@ class GPUTrainer:
         return EvaluatedPoint(point=point,
                               val_error=val_error, test_error=test_error,
                               resource_features=resource_features)
-    def evaluate_and_save(self, point, round):
+    def evaluate_and_save(self, point, round, experiment_name):
         log = logging.getLogger("Worker")
 
         data = self.trainer.dataset
         arch = point.arch
         model = self.ss.to_keras_model(arch, data.input_shape, data.num_classes)
-        results = self.trainer.train_and_eval_and_save(model, round=round, sparsity=point.sparsity)
+        results = self.trainer.train_and_eval_and_save(model, round=round, experiment_name=experiment_name,sparsity=point.sparsity)
         val_error, test_error = results["val_error"], results["test_error"]
         rg = self.ss.to_resource_graph(arch, data.input_shape, data.num_classes,
                                        pruned_weights=results["pruned_weights"])
@@ -196,7 +196,7 @@ class AgingEvoSearch:
             if should_submit_more(cap=self.initial_population_size):
                 self.log.info(f"Populating #{point_number()}...")
                 # scheduler.submit(self.random_sample())
-                scheduler.submit(self.random_sample(), len(self.history))
+                scheduler.submit(self.random_sample(), len(self.history), self.experiment_name)
             else:
                 info = scheduler.await_any()
                 self.population.append(info)
@@ -209,7 +209,7 @@ class AgingEvoSearch:
                 sample = np.random.choice(self.population, size=self.sample_size)
                 parent = max(sample, key=self.get_mo_fitness_fn())
 
-                scheduler.submit(self.evolve(parent.point), len(self.history))
+                scheduler.submit(self.evolve(parent.point), len(self.history), self.experiment_name)
             else:
                 info = scheduler.await_any()
                 self.population.append(info)

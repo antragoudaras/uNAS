@@ -106,7 +106,7 @@ class ModelTrainer:
             "pruned_weights": pruning_cb.weights if pruning_cb else None
         }
 
-    def train_and_eval_and_save(self, model: tf.keras.Model, round: int,
+    def train_and_eval_and_save(self, model: tf.keras.Model, round: int, experiment_name: str,
                        epochs: Optional[int] = None, sparsity: Optional[float] = None):
         """
         Trains a Keras model and returns its validation set error (1.0 - accuracy).
@@ -183,7 +183,7 @@ class ModelTrainer:
         log = model.fit(train, epochs=epochs, validation_data=val,
                         verbose=1 if debug_mode() else 2,
                         callbacks=callbacks, class_weight=class_weight)
-        model.save_weights(f"./save_model_weights_in_history/history_{round}_model", overwrite=True) 
+        model.save_weights(f"./save_weights_dir_{experiment_name}/history_{round}_model", overwrite=True) 
         test = dataset.test_dataset() \
             .batch(batch_size) \
             .prefetch(tf.data.experimental.AUTOTUNE)

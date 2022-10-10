@@ -13,18 +13,6 @@ if platform == "linux" or platform == "linux2":
 else:
     operating_sys = "windows"
 
-objects = []
-with (open("./artifacts/cnn_egg_cropped_low_freq/debug_subj1_agingevosearch_state.pickle", "rb")) as openfile:
-    while True:
-        try:
-            objects.append(pickle.load(openfile))
-        except EOFError:
-            break
-
-val_errors = []
-test_errors = []
-peak_mem_usage = [] 
-
 current_dir = os.getcwd()
 if operating_sys == "windows":
     current_dir = current_dir + "\\configs\\cnn_egg_aging_subj1_128kb_cropped_20perc_low_freq.py"
@@ -41,6 +29,18 @@ exec(Path(args.config_file).read_text(), configs)
 search_config = configs["search_config"]
 dataset = configs["training_config"].dataset
 
+objects = []
+with (open("./artifacts/cnn_egg_cropped_low_freq/debug_subj1_agingevosearch_state.pickle", "rb")) as openfile:
+    while True:
+        try:
+            objects.append(pickle.load(openfile))
+        except EOFError:
+            break
+
+val_errors = []
+test_errors = []
+peak_mem_usage = [] 
+
 new_curr_dir = os.getcwd()
 for round, point in enumerate(objects[0]):
     model = search_config.search_space.to_keras_model(point.point.arch, dataset.input_shape, dataset.num_classes)
@@ -52,9 +52,9 @@ for round, point in enumerate(objects[0]):
                   loss=loss, metrics=[accuracy])
 
     if operating_sys == "windows":
-        model.load_weights(f"{new_curr_dir}\\save_model_weights_in_history\\history_{round}_model")
+        model.load_weights(f"{new_curr_dir}\\save_weights_dir_debug_subj1\\history_{round}_model")
     else:
-        model.load_weights(f"{new_curr_dir}/save_model_weights_in_history/history_{round}_model")
+        model.load_weights(f"{new_curr_dir}/save_weights_dir_debug_subj1/history_{round}_model")
 
     
     test = dataset.test_dataset() \
