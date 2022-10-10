@@ -154,8 +154,8 @@ artifacts
 *.h5
 
 #tragos-ignores
-/.vscode
+.vscode/
 #/BCI_IV
 
 #ignore directory with saved keras weights
-/save_weights_*
+save_weights_*/
