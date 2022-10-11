@@ -75,7 +75,20 @@ _, test_acc = best_model_keras.evaluate(test, verbose=0)
 print("Loaded test acc. : {}".format(1.0-test_acc))
 print("Logged test acc. : {}".format(objects[0][minimum_arg].test_error))
 
+# for value in test.take(100):
+#     print("Dummy print")
+
+def representative_dataset():
+  for value in test.take(100):
+    yield [value[0]]
+
 converter = tf.lite.TFLiteConverter.from_keras_model(best_model_keras)
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+converter.inference_input_type = tf.int8
+converter.inference_output_type = tf.int8
+# Provide a representative dataset to ensure we quantize correctly.
+converter.representative_dataset = representative_dataset
 tflite_best_model = converter.convert()
 
 open("debug_subj1_toy_model.tflite", "wb").write(tflite_best_model)
